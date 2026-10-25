@@ -20,8 +20,20 @@ normal Booter finalize path.
 
 Tested on the Dell RTX 2080 Ti 22GB (`10de:1e07`) with NVIDIA driver 575.51.03.
 Also tested on two Gigabyte RTX 2080 Ti 22GB cards (`10de:1e04`, subsystem
-`1458:37c4`) with NVIDIA driver 580.178.04 on Linux 7.2.10 (CachyOS), unlocked
-together with `turing_unlock.targets=0000:01:00.0,0000:03:00.0`.
+`1458:37c4`), unlocked together with
+`turing_unlock.targets=0000:01:00.0,0000:03:00.0`:
+
+| | |
+| --- | --- |
+| VBIOS | `90.02.17.00.7C` (`01:00.0`), `90.02.30.00.81` (`03:00.0`) |
+| NVIDIA driver | 580.178.04 (`nvidia-580xx-utils`, proprietary) |
+| turing_unlock | 2.0.0, firmware 610.43.03 |
+| OS | CachyOS (Arch-based), x86_64 |
+| Kernel | 7.2.10-1-cachyos, bootloader Limine |
+| CUDA toolkit | 13.4 (benchmark build) |
+
+The two cards run different VBIOS versions with different ROM layouts, and both
+unlock.
 Both the proprietary driver and the open driver work. Other cards or other driver
 is not tested.
 
