@@ -19,6 +19,9 @@ The module writes two speed selectors. SS0 becomes `0x88888888`. SS1 becomes
 normal Booter finalize path.
 
 Tested on the Dell RTX 2080 Ti 22GB (`10de:1e07`) with NVIDIA driver 575.51.03.
+Also tested on two Gigabyte RTX 2080 Ti 22GB cards (`10de:1e04`, subsystem
+`1458:37c4`) with NVIDIA driver 580.178.04 on Linux 7.2.10 (CachyOS), unlocked
+together with `turing_unlock.targets=0000:01:00.0,0000:03:00.0`.
 Both the proprietary driver and the open driver work. Other cards or other driver
 is not tested.
 
@@ -34,6 +37,23 @@ TFLOPS of cuBALS FP16 matrix multiply with FP32 Accumulate on RTX 2080 Ti @250W
 | 8192 | 52.8 (92.8%) | 77.9 (136.9%) |
 
 100%peak = 56.9 TFLOPS, claimed in *NVIDIA Turing Architecture Whitepaper*
+
+Gigabyte RTX 2080 Ti 22GB (`10de:1e04`, `1458:37c4`) @250W, same test, one
+card locked and one unlocked in the same machine:
+
+| M.N.K | Locked | Unlocked |
+| ---: | ---: | ---:|
+| 1024 | 37.1 | 55.5 |
+| 2048 | 40.9 | 74.0 |
+| 4096 | 57.5 | 94.2 |
+| 8192 | 63.6 | 106.5 |
+
+Reproduce it with CUDA installed. `GPU` is a PCI address or CUDA index. The
+run fails if the 8192 case stays under `MIN_TFLOPS` (default 70):
+
+```sh
+make bench GPU=0000:01:00.0
+```
 
 ## Install
 
